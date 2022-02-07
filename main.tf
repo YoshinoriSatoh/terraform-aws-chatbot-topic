@@ -7,7 +7,7 @@ data "aws_region" "current" {}
 
 locals {
   metrics_notification = "${var.tf.fullname}-metrics-notification"
-  healthcheeck_notification = "${var.tf.fullname}-healthcheck-notification"
+  healthcheck_notification = "${var.tf.fullname}-healthcheck-notification"
 }
 
 # サーバー等メトリクス通知用トピック
@@ -53,18 +53,18 @@ resource "aws_sns_topic_subscription" "metrics_notification" {
 }
 
 # Route53ヘルスチェック用トピック
-resource "aws_sns_topic" "healthcheeck_notification" {
+resource "aws_sns_topic" "healthcheck_notification" {
   provider     = aws.useast1
-  name         = local.healthcheeck_notification
-  display_name = local.healthcheeck_notification
+  name         = local.healthcheck_notification
+  display_name = local.healthcheck_notification
   tags = {
-    Name = "${var.tf.fullname}-${local.healthcheeck_notification}"
+    Name = "${var.tf.fullname}-${local.healthcheck_notification}"
   }
 }
 
-resource "aws_sns_topic_policy" "healthcheeck_notification" {
+resource "aws_sns_topic_policy" "healthcheck_notification" {
   provider = aws.useast1
-  arn      = aws_sns_topic.healthcheeck_notification.arn
+  arn      = aws_sns_topic.healthcheck_notification.arn
   policy = jsonencode({
     Version : "2008-10-17",
     Statement : [
@@ -79,7 +79,7 @@ resource "aws_sns_topic_policy" "healthcheeck_notification" {
         Action: [
           "sns:Publish"
         ],
-        Resource: aws_sns_topic.healthcheeck_notification.arn,
+        Resource: aws_sns_topic.healthcheck_notification.arn,
         Condition: {
           ArnLike: {
             "aws:SourceArn" : "arn:aws:cloudwatch:us-east-1:${data.aws_caller_identity.current.account_id}:alarm:*"
@@ -90,9 +90,9 @@ resource "aws_sns_topic_policy" "healthcheeck_notification" {
   })
 }
 
-resource "aws_sns_topic_subscription" "healthcheeck_notification" {
+resource "aws_sns_topic_subscription" "healthcheck_notification" {
   provider  = aws.useast1
-  topic_arn = aws_sns_topic.healthcheeck_notification.arn
+  topic_arn = aws_sns_topic.healthcheck_notification.arn
   protocol  = "https"
   endpoint  = "https://global.sns-api.chatbot.amazonaws.com"
 }

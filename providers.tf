@@ -4,8 +4,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      TfName = local.tf.name
-      TfEnv  = local.tf.env
+      TfName = var.tf.name
+      TfEnv  = var.tf.env
     }
   }
 }
@@ -17,8 +17,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      TfName = local.tf.name
-      TfEnv  = local.tf.env
+      TfName = var.tf.name
+      TfEnv  = var.tf.env
     }
   }
 }

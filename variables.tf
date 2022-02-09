@@ -11,7 +11,3 @@ variable "tf" {
 variable "name" {
   type = string
 }
-
-variable "profile" {
-  type = string
-}

@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
-  name = "${var.tf.fullname}-${var.name}"
+  name = "${var.tf.fullname}-${replace(var.name, "_", "-")}"
 }
 
 resource "aws_sns_topic" "notification" {

@@ -7,12 +7,3 @@ variable "tf" {
     fullshortname = string
   })
 }
-
-variable "profile" {
-  type    = string
-  default = null
-}
-
-variable "region" {
-  type    = string
-}

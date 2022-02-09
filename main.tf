@@ -8,13 +8,13 @@ locals {
   name = "${var.tf.fullname}-${replace(var.name, "_", "-")}"
 }
 
-resource "aws_sns_topic" "notification" {
-  name         = local.name
-  display_name = local.name
-  tags = {
-    Name = "${local.name}"
-  }
-}
+# resource "aws_sns_topic" "notification" {
+#   name         = local.name
+#   display_name = local.name
+#   tags = {
+#     Name = "${local.name}"
+#   }
+# }
 
 # resource "aws_sns_topic_policy" "notification" {
 #   arn = aws_sns_topic.notification.arn

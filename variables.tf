@@ -7,3 +7,7 @@ variable "tf" {
     fullshortname = string
   })
 }
+
+variable "name" {
+  type = string
+}

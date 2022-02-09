@@ -2,7 +2,7 @@
 # SNS Topicのみ
 
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
+# data "aws_region" "current" {}
 
 locals {
   name = "${var.tf.fullname}-${replace(var.name, "_", "-")}"
